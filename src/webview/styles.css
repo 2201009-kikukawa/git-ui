@@ -1,0 +1,30 @@
+.git-commands-container {
+  display: block;
+}
+
+.git-command-item {
+  padding: 8px 12px;
+  border: 1px solid var(--git-ui-border);
+  background-color: var(--git-ui-sidebar-bg);
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  transition: background-color 0.15s ease;
+}
+
+.git-command-item:hover {
+  background-color: var(--git-ui-hover-bg);
+}
+
+.git-command-name {
+  color: var(--git-ui-sidebar-fg);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.git-command-description {
+  color: var(--git-ui-description-fg);
+  font-size: 11px;
+  margin-top: 2px;
+  line-height: 1.3;
+}

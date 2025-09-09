@@ -12,7 +12,7 @@ import { getNonce } from "../utilities/getNonce";
 import { GitEventListener } from "../listener/GitEventListener";
 
 export class ViewProvider implements WebviewViewProvider {
-  public static readonly viewType = "sample-id";
+  public static readonly viewType = "git-ui-view";
 
   constructor(private readonly _context: ExtensionContext) {}
 

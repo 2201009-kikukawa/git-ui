@@ -16,21 +16,22 @@
     "*"
   ],
   "contributes": {
-    "views": {
-      "sample-id": [
-        {
-          "type": "webview",
-          "id": "sample-id",
-          "name": "sample-name"
-        }
-      ]
-    },
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "sample-id",
-          "title": "sample-title",
+          "id": "git-ui",
+          "title": "GIT UI",
           "icon": "./resources/webview_icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "git-ui": [
+        {
+          "type": "webview",
+          "id": "git-ui-view",
+          "name": "GIT UI",
+          "when": "true"
         }
       ]
     }
