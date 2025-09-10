@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import { GIT_COMMANDS, GitCommand } from "../const/gitCommands";
+import { GIT_COMMANDS } from "../const/gitCommands";
 import { VSCODE_THEME_COLORS, CSS_VARIABLE_NAMES } from "../const/colors";
 import React from "react";
 import "./styles.css";
