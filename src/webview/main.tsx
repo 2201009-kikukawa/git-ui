@@ -1,15 +1,41 @@
-import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import { VSCodeButton } from "@vscode/webview-ui-toolkit/react";
+import { GIT_COMMANDS } from "../const/gitCommands";
+import { VSCODE_THEME_COLORS, CSS_VARIABLE_NAMES } from "../const/colors";
+import React from "react";
+import "./styles.css";
+
+// CSS変数を設定
+const setCSSVariables = () => {
+  const root = document.documentElement;
+  root.style.setProperty(
+    CSS_VARIABLE_NAMES.sidebarBackground,
+    VSCODE_THEME_COLORS.sidebarBackground
+  );
+  root.style.setProperty(
+    CSS_VARIABLE_NAMES.sideBarForeground,
+    VSCODE_THEME_COLORS.sideBarForeground
+  );
+  root.style.setProperty(CSS_VARIABLE_NAMES.descriptionText, VSCODE_THEME_COLORS.descriptionText);
+  root.style.setProperty(CSS_VARIABLE_NAMES.customBorder, VSCODE_THEME_COLORS.customBorder);
+  root.style.setProperty(
+    CSS_VARIABLE_NAMES.listHoverBackground,
+    VSCODE_THEME_COLORS.listHoverBackground
+  );
+};
 
 const main = () => {
-  const [text, setText] = useState<string>("");
-
+  React.useEffect(() => {
+    setCSSVariables();
+  }, []);
   return (
-    <>
-      <VSCodeButton onClick={(e) => setText("ボタンがクリックされました")}>ボタン</VSCodeButton>
-      <div>{text}</div>
-    </>
+    <div className="git-commands-container">
+      {GIT_COMMANDS.map((command) => (
+        <div key={command.key} className="git-command-item">
+          <div className="git-command-name">{command.command}</div>
+          <div className="git-command-description">{command.description}</div>
+        </div>
+      ))}
+    </div>
   );
 };
 

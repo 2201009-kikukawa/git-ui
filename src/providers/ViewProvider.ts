@@ -5,14 +5,16 @@ import {
   WebviewView,
   WebviewViewProvider,
   WebviewViewResolveContext,
+  ExtensionContext,
 } from "vscode";
 import { getUri } from "../utilities/getUri";
 import { getNonce } from "../utilities/getNonce";
+import { GitEventListener } from "../listener/GitEventListener";
 
 export class ViewProvider implements WebviewViewProvider {
-  public static readonly viewType = "sample-id";
+  public static readonly viewType = "git-ui-view";
 
-  constructor(private readonly _extensionUri: Uri) {}
+  constructor(private readonly _context: ExtensionContext) {}
 
   public resolveWebviewView(
     webviewView: WebviewView,
@@ -21,10 +23,16 @@ export class ViewProvider implements WebviewViewProvider {
   ) {
     webviewView.webview.options = {
       enableScripts: true,
-      localResourceRoots: [Uri.joinPath(this._extensionUri, "out")],
+      localResourceRoots: [Uri.joinPath(this._context.extensionUri, "out")],
     };
 
-    webviewView.webview.html = this._getWebviewContent(webviewView.webview, this._extensionUri);
+    webviewView.webview.html = this._getWebviewContent(
+      webviewView.webview,
+      this._context.extensionUri
+    );
+
+    const listener = new GitEventListener(this._context);
+    listener.setWebviewMessageListener(webviewView);
   }
 
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
@@ -38,9 +46,9 @@ export class ViewProvider implements WebviewViewProvider {
         <head>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}';">
           <link rel="stylesheet" href="${stylesUri}" />
-          <title>Sample</title>
+          <title>Git UI</title>
         </head>
         <body>
           <div id="root"></div>
