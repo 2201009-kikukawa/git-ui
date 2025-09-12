@@ -29,10 +29,13 @@ const webviewConfig = {
   ...baseConfig,
   target: "es2020",
   format: "esm",
-  entryPoints: ["./src/webview/main.tsx"],
-  outfile: "./out/webview.js",
+  entryPoints: [
+    "./src/webview/main.tsx",
+    "./src/webview/git-pull/GitPullView.tsx",
+    // 他のGitコマンド用ファイルもここに追加
+  ],
+  outdir: "./out/webview",
   plugins: [
-    // Copy webview css files to `out` directory unaltered
     copy({
       resolveFrom: "cwd",
       assets: {
