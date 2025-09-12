@@ -12,9 +12,8 @@ import {
 } from "vscode";
 import { getUri } from "../utilities/getUri";
 import { getNonce } from "../utilities/getNonce";
-import { GitCommandProvider } from "../config/GitCommandRegistry";
 
-export class GitPullViewProvider implements WebviewViewProvider, GitCommandProvider {
+export class GitPullViewProvider implements WebviewViewProvider {
   public static readonly viewType = "git-pull-view";
   private static activePanel: WebviewPanel | undefined;
 
@@ -36,12 +35,22 @@ export class GitPullViewProvider implements WebviewViewProvider, GitCommandProvi
     );
   }
 
+  // GitCommandProviderインターフェース実装
+  public openTab(context: ExtensionContext) {
+    const panel = window.createWebviewPanel("git-pull-tab", "Git Pull", ViewColumn.Active, {
+      enableScripts: true,
+      localResourceRoots: [Uri.joinPath(context.extensionUri, "out")],
+      retainContextWhenHidden: true,
+    });
+    GitPullViewProvider.activePanel = panel;
+    const provider = new GitPullViewProvider(context);
+    panel.webview.html = provider._getWebviewContent(panel.webview, context.extensionUri);
+  }
+
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
     const viewUri = getUri(webview, extensionUri, ["out", "webview", "git-pull", "GitPullView.js"]);
     const stylesUri = getUri(webview, extensionUri, ["out", "styles.css"]);
     const nonce = getNonce();
-
-    console.log("GitPull Webview URIs:", { viewUri, stylesUri, nonce });
 
     return /*html*/ `
       <!DOCTYPE html>
@@ -59,43 +68,5 @@ export class GitPullViewProvider implements WebviewViewProvider, GitCommandProvi
         </body>
       </html>
     `;
-  }
-
-  // GitCommandProviderインターフェース実装
-  public openTab(context: ExtensionContext) {
-    GitPullViewProvider.openTabStatic(context);
-  }
-
-  // 新規タブとしてWebviewPanelを開く静的メソッド
-  public static openTabStatic(context: ExtensionContext) {
-    // 既存のパネルが存在し、表示可能な場合はそれをアクティブにする
-    if (GitPullViewProvider.activePanel) {
-      GitPullViewProvider.activePanel.reveal(ViewColumn.Active);
-      return;
-    }
-
-    // 新しいパネルを作成
-    const panel = window.createWebviewPanel(
-      "git-pull-tab", // viewTypeを一意にする
-      "Git Pull",
-      ViewColumn.Active,
-      {
-        enableScripts: true,
-        localResourceRoots: [Uri.joinPath(context.extensionUri, "out")],
-        // Webviewを保持してタブが非表示になっても破棄されないようにする
-        retainContextWhenHidden: true,
-      }
-    );
-
-    GitPullViewProvider.activePanel = panel;
-
-    // Git Pull専用のWebviewコンテンツを設定
-    const provider = new GitPullViewProvider(context);
-    panel.webview.html = provider._getWebviewContent(panel.webview, context.extensionUri);
-
-    // パネルが破棄された時の処理
-    panel.onDidDispose(() => {
-      GitPullViewProvider.activePanel = undefined;
-    });
   }
 }
