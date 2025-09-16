@@ -28,3 +28,73 @@
   margin-top: 2px;
   line-height: 1.3;
 }
+
+.icon-area-wrap {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  margin: 3rem 0;
+}
+
+.git-icon {
+  font-size: 5rem !important;
+}
+
+.vm-icon {
+  font-size: 5rem !important;
+  margin-top: 5rem;
+}
+
+.icon-description {
+  margin-top: .5rem;
+  font-size: .8rem;
+}
+
+.icon-description p {
+  margin: 0;
+  text-align: center;
+}
+
+.animation-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow {
+  width: 40px;
+  height: 40px;
+  border-bottom: 1px solid var(--vscode-editor-foreground);
+  border-right: 1px solid var(--vscode-editor-foreground);
+  transform: rotate(45deg);
+  animation: move 2s infinite;
+  margin: -3px;
+}
+
+.arrow:nth-child(1) {
+  animation-delay: 0.15s;
+}
+
+.arrow:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.arrow:nth-child(3) {
+  animation-delay: 0.45s;
+}
+
+@keyframes move {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(40px) rotate(45deg);
+  }
+}
