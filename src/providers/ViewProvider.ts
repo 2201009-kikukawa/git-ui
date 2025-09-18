@@ -38,7 +38,6 @@ export class ViewProvider implements WebviewViewProvider {
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
     const webviewUri = getUri(webview, extensionUri, ["out", "webview", "main.js"]);
     const stylesUri = getUri(webview, extensionUri, ["out", "styles.css"]);
-    const iconUri = getUri(webview, extensionUri, ["out", "codicon.css"]);
     const nonce = getNonce();
 
     return /*html*/ `
@@ -47,9 +46,8 @@ export class ViewProvider implements WebviewViewProvider {
         <head>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}'; font-src ${webview.cspSource};">
+          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}';">
           <link rel="stylesheet" href="${stylesUri}" />
-          <link rel="stylesheet" href="${iconUri}">
           <title>Git UI</title>
         </head>
         <body>

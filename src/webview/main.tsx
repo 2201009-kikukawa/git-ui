@@ -40,26 +40,6 @@ const main = () => {
           <div className="git-command-description">{command.description}</div>
         </div>
       ))}
-
-      <div className="icon-area-wrap">
-        <span className="codicon codicon-github-inverted git-icon"></span>
-        <div className="icon-description">
-          <p>リモートリポジトリ</p>
-          <p>(GitHub)</p>
-        </div>
-
-        <div className="animation-container">
-          <div className="arrow"></div>
-          <div className="arrow"></div>
-          <div className="arrow"></div>
-        </div>
-
-        <span className="codicon codicon-vm vm-icon"></span>
-        <div className="icon-description">
-          <p className="icon-description">ローカルリポジトリ</p>
-          <p>(PC)</p>
-        </div>
-      </div>
     </div>
   );
 };
