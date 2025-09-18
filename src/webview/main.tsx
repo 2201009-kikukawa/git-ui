@@ -1,8 +1,10 @@
 import ReactDOM from "react-dom/client";
-import { GIT_COMMANDS } from "../const/gitCommands";
+import { GIT_COMMANDS_ARRAY } from "../const/gitCommands";
 import { VSCODE_THEME_COLORS, CSS_VARIABLE_NAMES } from "../const/colors";
 import React from "react";
 import "./styles.css";
+
+const vscode = acquireVsCodeApi();
 
 // CSS変数を設定
 const setCSSVariables = () => {
@@ -29,8 +31,11 @@ const main = () => {
   }, []);
   return (
     <div className="git-commands-container">
-      {GIT_COMMANDS.map((command) => (
-        <div key={command.key} className="git-command-item">
+      {GIT_COMMANDS_ARRAY.map((command) => (
+        <div
+          key={command.key}
+          className="git-command-item"
+          onClick={() => handleCommandClick(command.command)}>
           <div className="git-command-name">{command.command}</div>
           <div className="git-command-description">{command.description}</div>
         </div>
@@ -63,3 +68,8 @@ export default main;
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(React.createElement(main));
+
+// 共通のクリックハンドラ
+const handleCommandClick = (command: string) => {
+  vscode.postMessage({ command: "openGitCommandTab", commandName: command });
+};
