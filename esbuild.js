@@ -47,6 +47,7 @@ const webviewConfig = {
   entryPoints: [
     "./src/app/sidebar/main.tsx",
     "./src/app/git-pull/GitPullView.tsx",
+    "./src/app/git-push/GitPushView.tsx",
     // 他のGitコマンド用ファイルもここに追加
   ],
   outdir: "./out/webview",
