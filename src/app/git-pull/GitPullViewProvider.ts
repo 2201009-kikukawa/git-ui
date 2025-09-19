@@ -10,9 +10,9 @@ import {
   WebviewPanel,
   ViewColumn,
 } from "vscode";
-import { getUri } from "../utilities/getUri";
-import { getNonce } from "../utilities/getNonce";
-import { GitPullViewEventListener } from "../listener/GitPullViewEventListener";
+import { getUri } from "../../utilities/getUri";
+import { getNonce } from "../../utilities/getNonce";
+import { GitPullViewEventListener } from "./GitPullViewEventListener";
 
 export class GitPullViewProvider implements WebviewViewProvider {
   public static readonly viewType = "git-pull-view";

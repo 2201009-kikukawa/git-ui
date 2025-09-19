@@ -1,6 +1,6 @@
 import { ExtensionContext, window } from "vscode";
-import { ViewProvider } from "./providers/ViewProvider";
-import { GitPullViewProvider } from "./providers/GitPullViewProvider";
+import { ViewProvider } from "./app/sidebar/ViewProvider";
+import { GitPullViewProvider } from "./app/git-pull/GitPullViewProvider";
 
 export function activate(context: ExtensionContext) {
   const providers = [

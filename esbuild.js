@@ -45,8 +45,8 @@ const webviewConfig = {
   target: "es2020",
   format: "esm",
   entryPoints: [
-    "./src/webview/main.tsx",
-    "./src/webview/git-pull/GitPullView.tsx",
+    "./src/app/sidebar/main.tsx",
+    "./src/app/git-pull/GitPullView.tsx",
     // 他のGitコマンド用ファイルもここに追加
   ],
   outdir: "./out/webview",
@@ -54,7 +54,7 @@ const webviewConfig = {
     copy({
       resolveFrom: "cwd",
       assets: {
-        from: ["./src/webview/*.css"],
+        from: ["./src/app/styles.css"],
         to: ["./out"],
       },
     }),

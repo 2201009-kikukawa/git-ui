@@ -5,22 +5,22 @@ export interface GitCommand {
 }
 
 export const GIT_COMMANDS = {
-  PULL: {
+  pull: {
     key: "pull",
     command: "git pull",
     description: "リモートリポジトリから変更を取得してマージします",
   },
-  ADD: {
+  add: {
     key: "add",
     command: "git add",
     description: "ファイルをステージングエリアに追加します",
   },
-  COMMIT: {
+  commit: {
     key: "commit",
     command: "git commit",
     description: "ステージされた変更をコミットします",
   },
-  PUSH: {
+  push: {
     key: "push",
     command: "git push",
     description: "ローカルの変更をリモートリポジトリにプッシュします",
