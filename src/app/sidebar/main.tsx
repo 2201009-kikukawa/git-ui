@@ -1,8 +1,7 @@
 import ReactDOM from "react-dom/client";
-import { GIT_COMMANDS_ARRAY } from "../const/gitCommands";
-import { VSCODE_THEME_COLORS, CSS_VARIABLE_NAMES } from "../const/colors";
+import { GIT_COMMANDS_ARRAY } from "../../const/gitCommands";
+import { VSCODE_THEME_COLORS, CSS_VARIABLE_NAMES } from "../../const/colors";
 import React from "react";
-import "./styles.css";
 
 const vscode = acquireVsCodeApi();
 

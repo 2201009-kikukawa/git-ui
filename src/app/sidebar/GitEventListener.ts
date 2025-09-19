@@ -1,16 +1,16 @@
 import { ExtensionContext, WebviewView } from "vscode";
-import { GIT_COMMANDS } from "../const/gitCommands";
-import { GitPullViewProvider } from "../providers/GitPullViewProvider";
+import { GIT_COMMANDS } from "../../const/gitCommands";
+import { GitPullViewProvider } from "../git-pull/GitPullViewProvider";
 
 export class GitEventListener {
-  constructor(private readonly _context: ExtensionContext) {}
+  constructor(private readonly _context: ExtensionContext) { }
 
   public setWebviewMessageListener(webviewView: WebviewView) {
     webviewView.webview.onDidReceiveMessage((message) => {
       switch (message.command) {
         case "openGitCommandTab":
           // コマンドごとにProviderを呼び出す
-          if (message.commandName === GIT_COMMANDS.PULL.command) {
+          if (message.commandName === GIT_COMMANDS.pull.command) {
             new GitPullViewProvider(this._context).openTab(this._context);
           }
           // 他コマンドも今後追加

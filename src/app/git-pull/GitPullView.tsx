@@ -10,7 +10,7 @@ declare const acquireVsCodeApi: () => {
 const vscode = acquireVsCodeApi();
 
 
-const GitPullView: React.FC = () => {
+const gitPullView: React.FC = () => {
   const handleAlert = () => {
     vscode.postMessage({
       type: EventTypes.sendAlert
@@ -54,14 +54,14 @@ const GitPullView: React.FC = () => {
   );
 };
 
-export default GitPullView;
+export default gitPullView;
 
 // ReactDOM でレンダリング
 const initializeGitPullView = () => {
   const rootElement = document.getElementById("root");
   if (rootElement) {
     const root = ReactDOM.createRoot(rootElement);
-    root.render(React.createElement(GitPullView));
+    root.render(React.createElement(gitPullView));
   }
 };
 

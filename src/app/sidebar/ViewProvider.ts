@@ -7,14 +7,14 @@ import {
   WebviewViewResolveContext,
   ExtensionContext,
 } from "vscode";
-import { getUri } from "../utilities/getUri";
-import { getNonce } from "../utilities/getNonce";
-import { GitEventListener } from "../listener/GitEventListener";
+import { getUri } from "../../utilities/getUri";
+import { getNonce } from "../../utilities/getNonce";
+import { GitEventListener } from "./GitEventListener";
 
 export class ViewProvider implements WebviewViewProvider {
   public static readonly viewType = "git-ui-view";
 
-  constructor(private readonly _context: ExtensionContext) {}
+  constructor(private readonly _context: ExtensionContext) { }
 
   public resolveWebviewView(
     webviewView: WebviewView,
@@ -36,7 +36,7 @@ export class ViewProvider implements WebviewViewProvider {
   }
 
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
-    const webviewUri = getUri(webview, extensionUri, ["out", "webview", "main.js"]);
+    const webviewUri = getUri(webview, extensionUri, ["out", "webview", "sidebar", "main.js"]);
     const stylesUri = getUri(webview, extensionUri, ["out", "styles.css"]);
     const nonce = getNonce();
 
