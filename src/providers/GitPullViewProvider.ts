@@ -12,12 +12,13 @@ import {
 } from "vscode";
 import { getUri } from "../utilities/getUri";
 import { getNonce } from "../utilities/getNonce";
+import { GitPullViewEventListener } from "../listener/GitPullViewEventListener";
 
 export class GitPullViewProvider implements WebviewViewProvider {
   public static readonly viewType = "git-pull-view";
   private static activePanel: WebviewPanel | undefined;
 
-  constructor(private readonly _context: ExtensionContext) {}
+  constructor(private readonly _context: ExtensionContext) { }
 
   public resolveWebviewView(
     webviewView: WebviewView,
@@ -45,6 +46,8 @@ export class GitPullViewProvider implements WebviewViewProvider {
     GitPullViewProvider.activePanel = panel;
     const provider = new GitPullViewProvider(context);
     panel.webview.html = provider._getWebviewContent(panel.webview, context.extensionUri);
+    const listener = new GitPullViewEventListener();
+    listener.setWebviewMessageListener(panel);
   }
 
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {

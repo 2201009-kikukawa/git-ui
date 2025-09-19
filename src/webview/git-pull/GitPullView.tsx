@@ -1,11 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { VSCodeButton } from "@vscode/webview-ui-toolkit/react";
+import { EventListenerProps, EventTypes } from "../../types/classNames";
+
+// VSCode API使用
+declare const acquireVsCodeApi: () => {
+  postMessage: (message: EventListenerProps) => void;
+};
+const vscode = acquireVsCodeApi();
+
 
 const GitPullView: React.FC = () => {
+  const handleAlert = () => {
+    vscode.postMessage({
+      type: EventTypes.sendAlert
+    });
+  };
+
   return (
     <div className="section-wrap">
       <div className="main-section">
-        <h1 className="wrap-text">Git Pull</h1>
+        <div className="header">
+          <h1 className="wrap-text">Git Pull</h1>
+          <VSCodeButton className="submit-button" onClick={handleAlert}>実行</VSCodeButton>
+        </div>
         <h3>ひとことで言うと？</h3>
         <hr />
         <p>リモートリポジトリ（GitHub）の最新の変更を、ローカルリポジトリ（自分のPC）に適用させるためのコマンドです。共同で開発をする際に、他の人が更新した内容を取得するために使用します。</p>
