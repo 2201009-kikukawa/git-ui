@@ -15,6 +15,9 @@ export class GitEventListener {
           }
           // 他コマンドも今後追加
           break;
+
+        default:
+          break;
       }
     });
   }
