@@ -46,6 +46,7 @@
   place-items: center;
   height: 100%;
   margin: 5rem 0 3rem;
+  align-content: center;
 }
 
 .git-icon {
@@ -72,11 +73,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 2rem 0;
 }
 
 .down-arrow {
-  margin-bottom: -2rem;
-  margin-top: 2rem;
+  margin-bottom: 0;
+  margin-top: 4rem;
 }
 
 .arrow {
