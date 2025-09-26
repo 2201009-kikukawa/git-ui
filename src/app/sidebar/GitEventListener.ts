@@ -2,6 +2,7 @@ import { ExtensionContext, WebviewView } from "vscode";
 import { GIT_COMMANDS } from "../../const/gitCommands";
 import { GitPullViewProvider } from "../git-pull/GitPullViewProvider";
 import { GitPushViewProvider } from "../git-push/GitPushViewProvider";
+import { GitAddViewProvider } from "../git-add/GitAddViewProvider";
 
 export class GitEventListener {
   constructor(private readonly _context: ExtensionContext) { }
@@ -17,6 +18,10 @@ export class GitEventListener {
 
           if (message.commandName === GIT_COMMANDS.push.command) {
             new GitPushViewProvider(this._context).openTab(this._context);
+          }
+
+          if (message.commandName === GIT_COMMANDS.add.command) {
+            new GitAddViewProvider(this._context).openTab(this._context);
           }
           break;
         default:
