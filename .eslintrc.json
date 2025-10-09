@@ -19,7 +19,9 @@
   "overrides": [
     {
       "files": [
-        "./src/webview/main.tsx"
+        "./src/components/**/*.tsx",
+        "./tailwind.config.js",
+        "./postcss.config.mjs"
       ],
       "rules": {
         "@typescript-eslint/naming-convention": "off"
