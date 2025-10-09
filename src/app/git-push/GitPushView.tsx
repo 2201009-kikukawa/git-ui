@@ -20,12 +20,12 @@ const gitPushView: React.FC = () => {
   return (
     <div className="section-wrap">
       <div className="main-section">
-        <div className="header">
-          <h1 className="wrap-text">Git Push</h1>
+        <div className="header mt-4">
+          <h1 className="wrap-text text-2xl font-bold">Git Push</h1>
           <VSCodeButton className="submit-button" onClick={handleAlert}>実行</VSCodeButton>
         </div>
-        <h3>ひとことで言うと？</h3>
-        <hr />
+        <h3 className="text-base font-bold mt-4">ひとことで言うと？</h3>
+        <hr className="my-2" />
         <p>ローカルリポジトリ（自分のPC）の変更を、リモートリポジトリ（GitHub）に適用させるためのコマンドです。共同で開発をする際に、自分が更新した内容を全体に反映させるために使用します。</p>
       </div>
       <div className="sub-section">
