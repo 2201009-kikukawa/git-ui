@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 .git-commands-container {
   display: block;
 }
@@ -58,6 +60,10 @@
   margin-top: 5rem;
 }
 
+.add-icon, .minimize-icon {
+  font-weight: 700 !important;
+}
+
 .icon-description {
   margin-top: .5rem;
   font-size: .8rem;
@@ -68,7 +74,7 @@
   text-align: center;
 }
 
-.animation-container{
+.animation-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -96,7 +102,8 @@
   animation: move-down 2s infinite;
 }
 
-.arrow:nth-child(1), .down-arrow .arrow:nth-child(3) {
+.arrow:nth-child(1),
+.down-arrow .arrow:nth-child(3) {
   animation-delay: 0.15s;
 }
 
@@ -104,36 +111,42 @@
   animation-delay: 0.3s;
 }
 
-.arrow:nth-child(3), .down-arrow .arrow:nth-child(1) {
+.arrow:nth-child(3),
+.down-arrow .arrow:nth-child(1) {
   animation-delay: 0.45s;
+}
+
+.arrow-right {
+  font-size: 2rem !important;
+  font-weight: 700 !important;
 }
 
 @keyframes move {
   0% {
-    opacity: 0;
+    border-color: transparent;
   }
 
   50% {
-    opacity: 1;
+    border-color: var(--vscode-editor-foreground);
   }
 
   100% {
-    opacity: 0;
+    border-color: transparent;
     transform: translateY(40px) rotate(45deg);
   }
 }
 
 @keyframes move-down {
   0% {
-    opacity: 0;
+    border-color: transparent;
     transform: translateY(40px) rotate(225deg);
   }
 
   50% {
-    opacity: 1;
+    border-color: var(--vscode-editor-foreground);
   }
 
   100% {
-    opacity: 0;
+    border-color: transparent;
   }
 }
