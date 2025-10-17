@@ -52,15 +52,6 @@ const webviewConfig = {
     // 他のGitコマンド用ファイルもここに追加
   ],
   outdir: "./out/webview",
-  plugins: [
-    copy({
-      resolveFrom: "cwd",
-      assets: {
-        from: ["./src/app/styles.css"],
-        to: ["./out"],
-      },
-    }),
-  ],
 };
 
 // This watch config adheres to the conventions of the esbuild-problem-matchers

@@ -20,12 +20,12 @@ const gitPullView: React.FC = () => {
   return (
     <div className="section-wrap">
       <div className="main-section">
-        <div className="header">
-          <h1 className="wrap-text">Git Pull</h1>
+        <div className="header mt-4">
+          <h1 className="wrap-text text-2xl font-bold">Git Pull</h1>
           <VSCodeButton className="submit-button" onClick={handleAlert}>実行</VSCodeButton>
         </div>
-        <h3>ひとことで言うと？</h3>
-        <hr />
+        <h3 className="text-base font-bold mt-4">ひとことで言うと？</h3>
+        <hr className="my-2" />
         <p>リモートリポジトリ（GitHub）の最新の変更を、ローカルリポジトリ（自分のPC）に適用させるためのコマンドです。共同で開発をする際に、他の人が更新した内容を取得するために使用します。</p>
       </div>
       <div className="sub-section">
