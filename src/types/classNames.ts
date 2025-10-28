@@ -2,13 +2,14 @@ export enum EventTypes {
   sendAlert = "sendAlert",
   choiceAddFiles = "choiceAddFiles",
   sendAddFiles = "sendAddFiles",
-  openGitAddDialog = "openGitAddDialog",
+  openDialog = "openDialog",
   changedFilesResult = "changedFilesResult",
-  fileAdded = "fileAdded"
+  complete = "complete"
 };
 
 export type EventListenerProps = {
   type: EventTypes;
   file?: string;
   files?: string[];
+  commitMessage?: string;
 };
