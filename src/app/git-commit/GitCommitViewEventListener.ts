@@ -1,32 +1,27 @@
-import { extensions, Uri, WebviewPanel, window, workspace } from "vscode";
-import { EventTypes } from "../../types/classNames";
+import { EventTypes } from "@/types/classNames";
+import { extensions, WebviewPanel, window, workspace } from "vscode";
 
-export class GitAddViewEventListener {
+export class GitCommitViewEventListener {
   public setWebviewMessageListener(webviewView: WebviewPanel) {
     webviewView.webview.onDidReceiveMessage(async (message) => {
       switch (message.type) {
+        case EventTypes.openDialog:
+          this._getChangedFiles(webviewView);
+          break;
+
         case EventTypes.sendAlert:
           try {
-            let file: string = "";
-            message.files.map((f: string) => {
-              file += `"${f}" `;
-            });
-
-            const terminal = window.createTerminal('git add');
+            const terminal = window.createTerminal('git commit');
             terminal.show();
-            terminal.sendText((`git add ${file}`).trim());
+            terminal.sendText((`git commit -m "${message.commitMessage.trim()}"`));
 
-            window.showInformationMessage('Git Addを実行しました');
+            window.showInformationMessage('Git Commitを実行しました');
             webviewView.webview.postMessage({
               type: EventTypes.complete
             });
           } catch (err: any) {
             window.showErrorMessage(`実行に失敗しました: ${err.message}`);
           }
-          break;
-
-        case EventTypes.openDialog:
-          await this._getChangedFiles(webviewView);
           break;
 
         default:
@@ -70,13 +65,12 @@ export class GitAddViewEventListener {
       }
 
       const workspacePath = workspaceFolder.uri.fsPath;
-      let allChangedFiles: string[] = [];
 
       // VS CodeのGit APIを使用
       const repository = await this.getGitRepository();
       if (repository) {
         // 1. ワーキングツリーの変更されたファイル（Modified/Deleted/Added）
-        const workingTreeChanges = repository.state.workingTreeChanges.map((change: any) => {
+        const indexChanges = repository.state.indexChanges.map((change: any) => {
           const relativePath = change.uri.fsPath
             .replace(workspacePath, "")
             .replace(/^[\\\/]/, "")
@@ -84,9 +78,14 @@ export class GitAddViewEventListener {
           return relativePath;
         });
 
-        if (workingTreeChanges.length > 0) {
-          allChangedFiles.push(...workingTreeChanges);
+        if (indexChanges.length === 0) {
+          webviewView.webview.postMessage({
+            type: EventTypes.changedFilesResult,
+            error: "変更されたファイルがありません。先にGit Addを実行してください。",
+          });
         }
+
+        return;
       } else {
         webviewView.webview.postMessage({
           type: EventTypes.changedFilesResult,
@@ -94,15 +93,6 @@ export class GitAddViewEventListener {
         });
         return;
       }
-
-      // 重複を削除
-      const uniqueFiles = [...new Set(allChangedFiles)].filter((file) => file.trim() !== "");
-
-      webviewView.webview.postMessage({
-        type: EventTypes.changedFilesResult,
-        files: uniqueFiles
-      });
-
     } catch (error) {
       webviewView.webview.postMessage({
         type: EventTypes.changedFilesResult,
