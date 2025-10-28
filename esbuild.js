@@ -49,6 +49,7 @@ const webviewConfig = {
     "./src/app/git-pull/GitPullView.tsx",
     "./src/app/git-push/GitPushView.tsx",
     "./src/app/git-add/GitAddView.tsx",
+    "./src/app/git-commit/GitCommitView.tsx",
     // 他のGitコマンド用ファイルもここに追加
   ],
   outdir: "./out/webview",
