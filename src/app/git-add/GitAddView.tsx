@@ -9,8 +9,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "../../components/Dialog";
+import { Button } from "../../components/Button";
+
 declare const acquireVsCodeApi: () => {
   postMessage: (message: EventListenerProps) => void;
 };
@@ -46,7 +47,7 @@ const gitAddView: React.FC = () => {
         }
       }
 
-      if (message.type === EventTypes.fileAdded) {
+      if (message.type === EventTypes.complete) {
         setAddFileList([]);
         setIsDialogOpen(false);
       }
@@ -58,7 +59,7 @@ const gitAddView: React.FC = () => {
 
   const handleDialogOpen = () => {
     vscode.postMessage({
-      type: EventTypes.openGitAddDialog
+      type: EventTypes.openDialog
     });
     setIsDialogOpen(true);
   };
@@ -71,15 +72,15 @@ const gitAddView: React.FC = () => {
   };
 
   return (
-    <div className="section-wrap">
+    <div className="section-wrap px-4">
       <div className="main-section">
         <div className="header mt-4">
           <h1 className="wrap-text text-2xl font-bold">Git Add</h1>
           <div>
-            <VSCodeButton className="submit-button" onClick={handleDialogOpen}>選択</VSCodeButton>
+            <Button size="sm" className="submit-button" onClick={handleDialogOpen}>選択</Button>
 
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-              <DialogContent showCloseButton={false}>
+              <DialogContent className="grid-rows-[1fr_auto]" showCloseButton={false}>
                 <DialogHeader>
                   <div className="col-span-3 min-h-0 flex flex-col">
                     <DialogTitle>ワーキングツリー</DialogTitle>
@@ -87,7 +88,7 @@ const gitAddView: React.FC = () => {
                       {loading && <div>取得中...</div>}
                       {error && (
                         <div>
-                          <div className="text-red-500 mb-2 font-bold">エラー</div>
+                          <div className="text-[var(--vscode-editorError-foreground)] mb-2 font-bold">エラー</div>
                           <div className="text-start">{error}</div>
                         </div>
                       )}
@@ -100,8 +101,8 @@ const gitAddView: React.FC = () => {
                                 setAddFileList([...addFileList, file]);
                                 setFileList(fileList.filter(f => f !== file));
                               }}>
-                                {file}
-                                <span className="codicon codicon-add add-icon self-end"></span>
+                                <p className="whitespace-nowrap overflow-hidden overflow-ellipsis">{file}</p>
+                                <span className="codicon codicon-add add-icon self-end ml-2"></span>
                               </li>
                             ))}
                           </ul>
@@ -126,8 +127,8 @@ const gitAddView: React.FC = () => {
                               setFileList([...fileList, file]);
                               setAddFileList(addFileList.filter(f => f !== file));
                             }}>
-                              {file}
-                              <span className="codicon codicon-chrome-minimize minimize-icon self-end"></span>
+                              <p className="whitespace-nowrap overflow-hidden overflow-ellipsis">{file}</p>
+                              <span className="codicon codicon-chrome-minimize minimize-icon self-end ml-2"></span>
                             </li>
                           ))}
                         </ul>
@@ -136,7 +137,7 @@ const gitAddView: React.FC = () => {
                   </div>
                 </DialogHeader>
                 <DialogFooter>
-                  <VSCodeButton className="w-18" onClick={handleAlert}>実行</VSCodeButton>
+                  <Button className="w-18" onClick={handleAlert}>実行</Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>

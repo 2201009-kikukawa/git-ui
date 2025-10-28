@@ -18,14 +18,14 @@ export class GitAddViewEventListener {
 
             window.showInformationMessage('Git Addを実行しました');
             webviewView.webview.postMessage({
-              type: EventTypes.fileAdded
+              type: EventTypes.complete
             });
           } catch (err: any) {
             window.showErrorMessage(`実行に失敗しました: ${err.message}`);
           }
           break;
 
-        case EventTypes.openGitAddDialog:
+        case EventTypes.openDialog:
           await this._getChangedFiles(webviewView);
           break;
 
