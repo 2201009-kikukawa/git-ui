@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 .git-commands-container {
   display: block;
 }
@@ -33,22 +37,25 @@
 
 .section-wrap {
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 5fr 2fr;
+  letter-spacing: 0.02rem;
+  line-height: 1.3rem;
 }
 
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
+  margin: 2rem 0 0;
 }
 
 .icon-area-wrap {
   display: grid;
   place-items: center;
-  height: 100%;
-  margin: 5rem 0 3rem;
+  height: fit-content;
   align-content: center;
+  margin: .5rem 0 1rem;
 }
 
 .git-icon {
@@ -57,7 +64,11 @@
 
 .vm-icon {
   font-size: 5rem !important;
-  margin-top: 5rem;
+  margin-top: 3rem;
+}
+
+.pull-icon {
+  font-size: 4rem !important;
 }
 
 .add-icon, .minimize-icon {
@@ -84,12 +95,12 @@
 
 .down-arrow {
   margin-bottom: 0;
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 .arrow {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-bottom: 1px solid var(--vscode-editor-foreground);
   border-right: 1px solid var(--vscode-editor-foreground);
   transform: rotate(45deg);
