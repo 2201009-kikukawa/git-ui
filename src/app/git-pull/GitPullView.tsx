@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { EventListenerProps, EventTypes } from "../../types/classNames";
 import { Button } from "../../components/Button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../components/Collapsible";
 
 // VSCode API使用
 declare const acquireVsCodeApi: () => {
@@ -49,8 +50,11 @@ const gitPullView: React.FC = () => {
     { id: "time", title: "いつ使うの？" },
     { id: "example", title: "具体例で見る実行の流れ" },
     { id: "success", title: "どうなれば成功？" },
+    { id: "error", title: "よくあるエラーと解決策" },
+    { id: "vscode-git", title: "VSCode標準のGit拡張機能の場合の実行方法" },
   ];
   const activeId = useActiveSection(sections.map(section => section.id));
+  const [isOpen, setIsOpen] = useState<boolean[]>([]);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -70,6 +74,13 @@ const gitPullView: React.FC = () => {
   const handleAlert = () => {
     vscode.postMessage({
       type: EventTypes.sendAlert
+    });
+  };
+
+  const handleCommitLinkClick = () => {
+    vscode.postMessage({
+      type: EventTypes.sendAlert,
+      file: "commit"
     });
   };
 
@@ -125,7 +136,7 @@ const gitPullView: React.FC = () => {
               <div className={codeArea}>
                 <p>└── example-project/</p>
                 <p className="pl-4">  ├── README.md</p>
-                <p className="pl-4 bg-[var(--vscode-editorGutter-addedSecondaryBackground)]">  └── example.txt ←追加された</p>
+                <p className="px-4 bg-[var(--vscode-editorGutter-addedSecondaryBackground)] w-fit">  └── example.txt ←追加された</p>
               </div>
             </div>
           </div>
@@ -166,6 +177,56 @@ const gitPullView: React.FC = () => {
               </div>
             </div>
           </div>
+
+          <div>
+            <h3 className="text-xl font-bold mt-12" id="error">よくあるエラーと解決策</h3>
+            <hr className="my-2" />
+            <Collapsible open={isOpen[0]} onOpenChange={(open) => {
+              const newIsOpen = [...isOpen];
+              newIsOpen[0] = open;
+              setIsOpen(newIsOpen);
+            }}>
+              <CollapsibleTrigger>
+                <p className="flex items-center gap-2 cursor-pointer">
+                  Your local changes to the following files would be overwritten by merge:
+                  {isOpen[0] ? <span className="codicon codicon-chevron-up"></span> : <span className="codicon codicon-chevron-down"></span>}
+                </p>
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <p className="font-bold mt-4">原因</p>
+                <p>コミットしていない変更（作業中の変更）がローカルに存在し、pull しようとしているリモートの変更と競合するため、Gitが「作業内容が消えてしまう危険がある」と判断して処理を停止している状況です。</p>
+                <p className="font-bold mt-4">解決策</p>
+                <p>以下のいずれかの方法で、作業中の変更を整理してから再度git pull を実行します。</p>
+                <ol className="list-[upper-latin] ml-8 mt-4">
+                  <li className="mt-2">
+                    変更を一時退避する（推奨）
+                    <p>git stashコマンドで、作業中の変更を一時的に保存します。</p>
+                    <p className="w-fit cursor-pointer hover:underline text-[var(--vscode-textLink-foreground)]">git stashについてはこちら</p>
+                  </li>
+                  <li className="mt-2">
+                    変更をコミットする
+                    <p>作業中の変更がキリのいいところであれば、コミットしてしまいます。</p>
+                    <p className="w-fit cursor-pointer hover:underline text-[var(--vscode-textLink-foreground)]" onClick={handleCommitLinkClick}>git commitについてはこちら</p>
+                  </li>
+                  <li className="mt-2">
+                    変更を破棄する
+                    <p>作業中のローカルの変更が不要な場合は、削除してしまいましょう。</p>
+                  </li>
+                </ol>
+              </CollapsibleContent>
+            </Collapsible>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold mt-12" id="vscode-git">VSCode標準のGit拡張機能の場合の実行方法</h3>
+            <hr className="my-2" />
+            <ol className="list-decimal ml-4 mt-4">
+              <li>VSCode左のサイドバーからソース管理のアイコンを選択</li>
+              <li>「...」をクリックしてメニューを表示</li>
+              <li>「プル」をクリック</li>
+            </ol>
+          </div>
+
         </div>
       </div>
 
