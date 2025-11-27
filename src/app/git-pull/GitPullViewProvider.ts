@@ -46,7 +46,7 @@ export class GitPullViewProvider implements WebviewViewProvider {
     GitPullViewProvider.activePanel = panel;
     const provider = new GitPullViewProvider(context);
     panel.webview.html = provider._getWebviewContent(panel.webview, context.extensionUri);
-    const listener = new GitPullViewEventListener();
+    const listener = new GitPullViewEventListener(context);
     listener.setWebviewMessageListener(panel);
   }
 
