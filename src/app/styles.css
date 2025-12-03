@@ -71,7 +71,8 @@ html {
   font-size: 4rem !important;
 }
 
-.add-icon, .minimize-icon {
+.add-icon,
+.minimize-icon {
   font-weight: 700 !important;
 }
 
@@ -83,6 +84,10 @@ html {
 .icon-description p {
   margin: 0;
   text-align: center;
+}
+
+.mobile {
+  display: none;
 }
 
 .animation-container {
@@ -159,5 +164,30 @@ html {
 
   100% {
     border-color: transparent;
+  }
+}
+
+@media (max-width: 768px) {
+  .git-icon {
+    font-size: 3rem !important;
+  }
+
+  .vm-icon {
+    font-size: 4rem !important;
+    margin-top: 4rem;
+  }
+
+  .icon-description p {
+    margin-bottom: 0.5rem;
+  }
+
+  .animation-container {
+    margin: 0;
+  }
+
+  .arrow {
+    width: 15px;
+    height: 15px;
+    margin: 3px;
   }
 }

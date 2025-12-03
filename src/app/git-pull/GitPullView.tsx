@@ -11,8 +11,9 @@ declare const acquireVsCodeApi: () => {
 const vscode = acquireVsCodeApi();
 
 const code = "text-[var(--vscode-editorInfo-foreground)] bg-[var(--vscode-editor-hoverHighlightBackground)] rounded-md mx-2 px-1";
-const codeArea = "rounded-b-lg rounded-tr-lg bg-[var(--vscode-editor-hoverHighlightBackground)] p-4";
-const codeTitle = "rounded-t-lg bg-[var(--vscode-editor-hoverHighlightBackground)] px-4 pb-1 pt-2 text-[var(--vscode-editorHint-foreground)] w-fit";
+const codeArea = "rounded-b-lg rounded-tr-lg bg-[#232B35] text-[#FFFFFF] p-4";
+const codeTitle = "rounded-t-lg bg-[#333E52] px-4 pb-1 pt-2 text-[#FFFFFF] w-fit";
+const content = "bg-[var(--vscode-textBlockQuote-background)] rounded-md border-1 border-[var(--vscode-editorWidget-border)] justify-self-center w-full";
 
 const useActiveSection = (sectionIds: string[]) => {
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -94,7 +95,7 @@ const gitPullView: React.FC = () => {
           <h1 className="wrap-text text-2xl font-bold">git pull</h1>
         </div>
 
-        <div className="bg-[var(--vscode-textBlockQuote-background)] mt-12 px-4 py-6 rounded-md border-1 border-[var(--vscode-editorWidget-border)]">
+        <div className={`${content} mt-12 p-[16px] max-w-[800px]`}>
           <div>
             <h3 className="text-xl font-bold" id="description">ひとことで言うと？</h3>
             <hr className="my-2" />
@@ -136,7 +137,7 @@ const gitPullView: React.FC = () => {
               <div className={codeArea}>
                 <p>└── example-project/</p>
                 <p className="pl-4">  ├── README.md</p>
-                <p className="px-4 bg-[var(--vscode-editorGutter-addedSecondaryBackground)] w-fit">  └── example.txt ←追加された</p>
+                <p className="px-4 bg-[#1B3C36] w-fit">  └── example.txt ←追加された</p>
               </div>
             </div>
           </div>
@@ -155,10 +156,10 @@ const gitPullView: React.FC = () => {
                 <p className="pl-4">remote: Compressing objects: 100% (3/3), done.</p>
                 <p className="pl-4">remote: Total 13 (delta 2), reused 5 (delta 2), pack-reused 7 (from   1)</p>
                 <p className="pl-4">Unpacking objects: 100% (13/13), 4.64 KiB | 431.00 KiB/s, done.</p>
-                <p className="pl-4">From https://github.com/demo-user/exaple-project</p>
+                <p className="pl-4">From https://github.com/demo-user/example-project</p>
                 <p className="pl-8">a0905f8..7cbb6ba  main       -&gt; origin/main</p>
                 <p className="pl-4">Updating a0905f8..7cbb6ba</p>
-                <p className="pl-8">README.md                           |  57 <span className="text-[var(--vscode-gitDecoration-untrackedResourceForeground)]">+++++++++++++++++++++++++</span></p>
+                <p className="pl-8">README.md                           |  57 <span className="text-[#0FBC7A]">+++++++++++++++++++++++++</span></p>
                 <p className="pl-4">2 files changed, 225 insertions(+), 186 deletions(-)</p>
                 <p className="pl-4">create mode 100644 src/example.txt</p>
                 <p className="pl-4">delete mode 100644 src/delete.txt</p>
@@ -187,7 +188,7 @@ const gitPullView: React.FC = () => {
               setIsOpen(newIsOpen);
             }}>
               <CollapsibleTrigger>
-                <p className="flex items-center gap-2 cursor-pointer">
+                <p className="flex items-center gap-2 cursor-pointer truncate">
                   Your local changes to the following files would be overwritten by merge:
                   {isOpen[0] ? <span className="codicon codicon-chevron-up"></span> : <span className="codicon codicon-chevron-down"></span>}
                 </p>
@@ -217,7 +218,7 @@ const gitPullView: React.FC = () => {
             </Collapsible>
           </div>
 
-          <div>
+          <div className="mb-4">
             <h3 className="text-xl font-bold mt-12" id="vscode-git">VSCode標準のGit拡張機能の場合の実行方法</h3>
             <hr className="my-2" />
             <ol className="list-decimal ml-4 mt-4">
@@ -232,13 +233,13 @@ const gitPullView: React.FC = () => {
 
       {/* サブエリア */}
       <div className="sub-section px-4 md:px-12 h-[100vh] sticky top-0 grid grid-rows-[auto_2fr_3fr] gap-6">
-        <div className="sticky top-0 bg-[var(--vscode-editor-background)] px-2 pt-8 pb-4 z-10 justify-self-center">
-          <Button className="submit-button" onClick={handleAlert}>Git Pullを実行</Button>
+        <div className={`${content} sticky top-0 p-[16px] mt-4 z-10 max-w-[300px]`}>
+          <Button className="submit-button w-full cursor-pointer" onClick={handleAlert}>Git Pullを実行</Button>
         </div>
 
         {/* 目次 */}
-        <div className="overflow-y-auto bg-[var(--vscode-textBlockQuote-background)] p-4 rounded-md border-1 border-[var(--vscode-editorWidget-border)]">
-          <h3 className="text-base font-bold mt-4">目次</h3>
+        <div className={`${content} p-[16px] overflow-y-auto max-w-[300px]`}>
+          <h3 className="text-base font-bold">目次</h3>
           <hr className="my-2" />
           {sections.map(({ id, title }) => (
             <a
@@ -256,11 +257,13 @@ const gitPullView: React.FC = () => {
         </div>
 
         {/* アイコンエリア */}
-        <div className="overflow-y-auto bg-[var(--vscode-textBlockQuote-background)] p-4 rounded-md border-1 border-[var(--vscode-editorWidget-border)]">
-          <div className="icon-area-wrap">
+        <div className={`${content} p-[16px] overflow-y-auto max-w-[300px]`}>
+          <p className="text-base font-bold mt-4 mb-8 text-center">動作イメージ</p>
+          <div className="icon-area-wrap flex flex-col items-center justify-center gap-2">
             <span className="codicon codicon-github-inverted git-icon"></span>
             <div className="icon-description">
-              <p>リモートリポジトリ</p>
+              <p className="md:hidden">リモート<br />リポジトリ</p>
+              <p className="hidden md:block">リモートリポジトリ</p>
               <p>(GitHub)</p>
             </div>
 
@@ -273,7 +276,8 @@ const gitPullView: React.FC = () => {
 
             <span className="codicon codicon-vm vm-icon"></span>
             <div className="icon-description">
-              <p className="icon-description">ローカルリポジトリ</p>
+              <p className="md:hidden">ローカル<br />リポジトリ</p>
+              <p className="hidden md:block">ローカルリポジトリ</p>
               <p>(PC)</p>
             </div>
           </div>
