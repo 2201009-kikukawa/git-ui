@@ -6,12 +6,13 @@ html {
 
 .git-commands-container {
   display: block;
+  margin: 16px;
 }
 
 .git-command-item {
   padding: 8px 12px;
-  border: 1px solid var(--git-ui-border);
-  background-color: var(--git-ui-sidebar-bg);
+  border: 1px solid #5a5757;
+  background-color: var(--vscode-textBlockQuote-background);
   cursor: pointer;
   border-radius: 4px;
   margin-bottom: 8px;
@@ -23,7 +24,7 @@ html {
 }
 
 .git-command-name {
-  color: var(--git-ui-sidebar-fg);
+  color: #ffffff;
   font-size: 13px;
   font-weight: 400;
 }
@@ -31,15 +32,24 @@ html {
 .git-command-description {
   color: var(--git-ui-description-fg);
   font-size: 11px;
-  margin-top: 2px;
+  margin-top: 6px;
   line-height: 1.3;
 }
 
 .section-wrap {
   display: grid;
-  grid-template-columns: 5fr 2fr;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  max-width: 1140px;
+  margin: 0 auto;
   letter-spacing: 0.02rem;
   line-height: 1.3rem;
+  width: 100%;
+}
+
+.sub-section {
+  align-self: flex-start;
+  row-gap: 16px;
+  margin: 16px;
 }
 
 .header {
@@ -50,12 +60,42 @@ html {
   margin: 2rem 0 0;
 }
 
+.execute-button-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.submit-button {
+  min-width: 200px;
+}
+
+.execute-hint {
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 0.8rem;
+  padding: 6px 16px;
+  border-radius: 999px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  position: absolute;
+  bottom: -24px;
+}
+
+.execute-button-wrap:hover .execute-hint,
+.execute-button-wrap:focus-within .execute-hint {
+  opacity: 1;
+}
+
 .icon-area-wrap {
   display: grid;
   place-items: center;
   height: fit-content;
   align-content: center;
-  margin: .5rem 0 1rem;
+  margin: 0.5rem 0 1rem;
 }
 
 .git-icon {
@@ -77,8 +117,8 @@ html {
 }
 
 .icon-description {
-  margin-top: .5rem;
-  font-size: .8rem;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
 }
 
 .icon-description p {
@@ -95,7 +135,8 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2rem 0;
+  margin: 1rem 0;
+  height: 200px;
 }
 
 .down-arrow {
@@ -104,13 +145,13 @@ html {
 }
 
 .arrow {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   border-bottom: 1px solid var(--vscode-editor-foreground);
   border-right: 1px solid var(--vscode-editor-foreground);
   transform: rotate(45deg);
   animation: move 2s infinite;
-  margin: -3px;
+  margin: -2px;
 }
 
 .down-arrow .arrow {
