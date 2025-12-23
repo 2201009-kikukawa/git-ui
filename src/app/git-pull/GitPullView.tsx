@@ -3,6 +3,13 @@ import ReactDOM from "react-dom/client";
 import { EventListenerProps, EventTypes } from "../../types/classNames";
 import { Button } from "../../components/Button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../components/Collapsible";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "../../components/Dialog";
 
 // VSCode API使用
 declare const acquireVsCodeApi: () => {
@@ -60,6 +67,7 @@ const gitPullView: React.FC = () => {
   ];
   const activeId = useActiveSection(sections.map((section) => section.id));
   const [isOpen, setIsOpen] = useState<boolean[]>([]);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -89,6 +97,11 @@ const gitPullView: React.FC = () => {
       type: EventTypes.sendAlert,
       file: "commit",
     });
+  };
+
+  const handleConfirmExecute = () => {
+    handleAlert();
+    setIsConfirmOpen(false);
   };
 
   return (
@@ -290,7 +303,9 @@ const gitPullView: React.FC = () => {
       <div className="sub-section grid">
         <div className={`${content} p-[16px] max-w-[300px]`}>
           <div className="execute-button-wrap">
-            <Button className="submit-button cursor-pointer mx-auto" onClick={handleAlert}>
+            <Button
+              className="submit-button cursor-pointer mx-auto"
+              onClick={() => setIsConfirmOpen(true)}>
               Git Pullを実行
             </Button>
             <p className="execute-hint">クリック後に確認画面が開きます</p>
@@ -351,6 +366,30 @@ const gitPullView: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <Dialog open={isConfirmOpen} onOpenChange={setIsConfirmOpen}>
+        <DialogContent
+          overlayClassName="bg-black/70"
+          showCloseButton={false}
+          className="min-h-0 w-[min(90vw,22rem)] gap-6 p-6 text-center">
+          <DialogHeader className="flex justify-center">
+            <DialogTitle className="text-lg font-semibold whitespace-nowrap">
+              コマンドを実行しますか？
+            </DialogTitle>
+          </DialogHeader>
+          <DialogFooter className="flex gap-4">
+            <Button
+              variant="secondary"
+              className="min-w-[96px]"
+              onClick={() => setIsConfirmOpen(false)}>
+              いいえ
+            </Button>
+            <Button className="min-w-[96px]" onClick={handleConfirmExecute}>
+              はい
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
