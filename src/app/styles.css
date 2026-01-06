@@ -6,6 +6,7 @@ html {
 
 .git-commands-container {
   display: block;
+  margin: 8px
 }
 
 .git-command-item {
