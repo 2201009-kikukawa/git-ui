@@ -327,7 +327,7 @@ const gitPullView: React.FC = () => {
             <a
               key={id}
               onClick={(e) => handleClick(e, id)}
-              className={`block px-4 py-1 rounded transition-colors duration-200 cursor-pointer truncate
+              className={`block px-4 py-1 rounded transition-colors duration-200 cursor-pointer
                 ${
                   activeId === id
                     ? "font-medium"
