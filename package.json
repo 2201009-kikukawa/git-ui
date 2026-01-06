@@ -20,7 +20,7 @@
       "activitybar": [
         {
           "id": "git-ui",
-          "title": "GIT UI",
+          "title": "Git Box",
           "icon": "./resources/webview_icon.svg"
         }
       ]
@@ -30,7 +30,7 @@
         {
           "type": "webview",
           "id": "git-ui-view",
-          "name": "GIT UI",
+          "name": "Git Box",
           "when": "true"
         }
       ]

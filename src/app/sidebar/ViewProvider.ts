@@ -14,7 +14,7 @@ import { GitEventListener } from "./GitEventListener";
 export class ViewProvider implements WebviewViewProvider {
   public static readonly viewType = "git-ui-view";
 
-  constructor(private readonly _context: ExtensionContext) { }
+  constructor(private readonly _context: ExtensionContext) {}
 
   public resolveWebviewView(
     webviewView: WebviewView,
@@ -48,7 +48,7 @@ export class ViewProvider implements WebviewViewProvider {
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}';">
           <link rel="stylesheet" href="${stylesUri}" />
-          <title>Git UI</title>
+          <title>Git Box</title>
         </head>
         <body>
           <div id="root"></div>
