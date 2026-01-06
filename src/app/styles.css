@@ -6,7 +6,6 @@ html {
 
 .git-commands-container {
   display: block;
-  margin: 16px;
 }
 
 .git-command-item {
@@ -48,8 +47,10 @@ html {
 
 .sub-section {
   align-self: flex-start;
-  row-gap: 16px;
+  gap: 16px;
   margin: 16px;
+  position: sticky;
+  top: 16px;
 }
 
 .header {
@@ -91,9 +92,8 @@ html {
 }
 
 .icon-area-wrap {
-  display: grid;
+  display: flex;
   place-items: center;
-  height: fit-content;
   align-content: center;
   margin: 0.5rem 0 1rem;
 }
@@ -208,6 +208,61 @@ html {
   }
 }
 
+.icon-area-wrap-horizontal {
+  display: flex;
+  place-items: center;
+  align-content: center;
+  margin: 0.5rem 0 1rem;
+}
+
+.icon-area-wrap-horizontal .vm-icon {
+  margin-top: 0 !important;
+}
+
+.animation-container-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1rem;
+  width: 200px;
+}
+
+.arrow-horizontal {
+  width: 24px;
+  height: 24px;
+  border-bottom: 1px solid var(--vscode-editor-foreground);
+  border-right: 1px solid var(--vscode-editor-foreground);
+  transform: rotate(-45deg);
+  animation: move-right 2s infinite;
+  margin: 0 -2px;
+}
+
+.arrow-horizontal:nth-child(1) {
+  animation-delay: 0.15s;
+}
+
+.arrow-horizontal:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.arrow-horizontal:nth-child(3) {
+  animation-delay: 0.45s;
+}
+
+@keyframes move-right {
+  0% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--vscode-editor-foreground);
+  }
+  100% {
+    border-color: transparent;
+    transform: translateX(40px) rotate(-45deg);
+  }
+}
+
 @media (max-width: 768px) {
   .git-icon {
     font-size: 3rem !important;
@@ -215,7 +270,7 @@ html {
 
   .vm-icon {
     font-size: 4rem !important;
-    margin-top: 4rem;
+    margin-top: 0;
   }
 
   .icon-description p {
@@ -230,5 +285,15 @@ html {
     width: 15px;
     height: 15px;
     margin: 3px;
+  }
+
+  .animation-container-horizontal {
+    width: 120px;
+  }
+
+  .arrow-horizontal {
+    width: 15px;
+    height: 15px;
+    margin: 0 3px;
   }
 }

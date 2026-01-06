@@ -123,6 +123,40 @@ const gitPullView: React.FC = () => {
             <p>
               リモートリポジトリ（GitHub）の最新の状態を、ローカルリポジトリ（自分のPC）にダウンロードするコマンドです。
             </p>
+
+            <div className="icon-area-wrap-horizontal flex flex-row items-center justify-center gap-6 mt-6">
+              <div className="flex flex-col items-center gap-2">
+                <span className="codicon codicon-github-inverted git-icon"></span>
+                <div className="icon-description">
+                  <p className="md:hidden">
+                    リモート
+                    <br />
+                    リポジトリ
+                  </p>
+                  <p className="hidden md:block">リモートリポジトリ</p>
+                  <p>(GitHub)</p>
+                </div>
+              </div>
+
+              <div className="animation-container-horizontal flex flex-row items-center justify-center">
+                <div className="arrow-horizontal"></div>
+                <div className="arrow-horizontal"></div>
+                <div className="arrow-horizontal"></div>
+              </div>
+
+              <div className="flex flex-col items-center gap-2">
+                <span className="codicon codicon-vm vm-icon"></span>
+                <div className="icon-description">
+                  <p className="md:hidden">
+                    ローカル
+                    <br />
+                    リポジトリ
+                  </p>
+                  <p className="hidden md:block">ローカルリポジトリ</p>
+                  <p>(PC)</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div>
@@ -301,8 +335,8 @@ const gitPullView: React.FC = () => {
       </div>
 
       {/* サブエリア */}
-      <div className="sub-section grid">
-        <div className={`${content} p-[16px] max-w-[300px]`}>
+      <div className="sub-section flex flex-col">
+        <div className={`${content} p-[16px] max-w-[300px] flex-shrink-0`}>
           <div className="execute-button-wrap">
             <Tooltip>
               <TooltipTrigger asChild>
@@ -320,7 +354,7 @@ const gitPullView: React.FC = () => {
         </div>
 
         {/* 目次 */}
-        <div className={`${content} p-[16px] max-w-[300px]`}>
+        <div className={`${content} p-[16px] max-w-[300px] flex-shrink-0`}>
           <h3 className="text-base font-bold">目次</h3>
           <hr className="my-2" />
           {sections.map(({ id, title }) => (
@@ -336,41 +370,6 @@ const gitPullView: React.FC = () => {
               {title}
             </a>
           ))}
-        </div>
-
-        {/* アイコンエリア */}
-        <div className={`${content} p-[16px] max-w-[300px]`}>
-          <p className="text-base font-bold mt-4 mb-8 text-center">動作イメージ</p>
-          <div className="icon-area-wrap flex flex-col items-center justify-center gap-2">
-            <span className="codicon codicon-github-inverted git-icon"></span>
-            <div className="icon-description">
-              <p className="md:hidden">
-                リモート
-                <br />
-                リポジトリ
-              </p>
-              <p className="hidden md:block">リモートリポジトリ</p>
-              <p>(GitHub)</p>
-            </div>
-
-            {/* 矢印 */}
-            <div className="animation-container">
-              <div className="arrow"></div>
-              <div className="arrow"></div>
-              <div className="arrow"></div>
-            </div>
-
-            <span className="codicon codicon-vm vm-icon"></span>
-            <div className="icon-description">
-              <p className="md:hidden">
-                ローカル
-                <br />
-                リポジトリ
-              </p>
-              <p className="hidden md:block">ローカルリポジトリ</p>
-              <p>(PC)</p>
-            </div>
-          </div>
         </div>
       </div>
 
