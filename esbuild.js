@@ -32,6 +32,10 @@ const extensionConfig = {
         {
           from: ["./node_modules/@vscode/codicons/dist/codicon.css"],
           to: ["./out"]
+        },
+        {
+          from: ["./resources/git-pull-vs-code-ui.png"],
+          to: ["./out/resources"]
         }
       ]
     })

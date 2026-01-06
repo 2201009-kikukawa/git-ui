@@ -54,6 +54,7 @@ export class GitPullViewProvider implements WebviewViewProvider {
     const viewUri = getUri(webview, extensionUri, ["out", "webview", "git-pull", "GitPullView.js"]);
     const stylesUri = getUri(webview, extensionUri, ["out", "styles.css"]);
     const iconUri = getUri(webview, extensionUri, ["out", "codicon.css"]);
+    const imageUri = getUri(webview, extensionUri, ["out", "resources", "git-pull-vs-code-ui.png"]);
     const nonce = getNonce();
 
     return /*html*/ `
@@ -62,13 +63,13 @@ export class GitPullViewProvider implements WebviewViewProvider {
         <head>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}'; font-src ${webview.cspSource};">
+          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}'; font-src ${webview.cspSource}; img-src ${webview.cspSource};">
           <link rel="stylesheet" href="${stylesUri}" />
           <link rel="stylesheet" href="${iconUri}">
           <title>Git Pull</title>
         </head>
         <body>
-          <div id="root"></div>
+          <div id="root" data-image-uri="${imageUri}"></div>
           <script type="module" nonce="${nonce}" src="${viewUri}"></script>
         </body>
       </html>

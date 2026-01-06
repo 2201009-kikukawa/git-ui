@@ -69,6 +69,17 @@ const gitPullView: React.FC = () => {
   const activeId = useActiveSection(sections.map((section) => section.id));
   const [isOpen, setIsOpen] = useState<boolean[]>([]);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [imageUri, setImageUri] = useState<string>("");
+
+  useEffect(() => {
+    const rootElement = document.getElementById("root");
+    if (rootElement) {
+      const uri = rootElement.getAttribute("data-image-uri");
+      if (uri) {
+        setImageUri(uri);
+      }
+    }
+  }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -106,7 +117,7 @@ const gitPullView: React.FC = () => {
   };
 
   return (
-    <div className="section-wrap px-2 md:px-6 lg:px-10">
+    <div className="section-wrap px-2 md:px-6 lg:px-10 pb-4">
       <div className="header flex flex-col w-full lg:hidden">
         <span className="codicon codicon-repo-pull pull-icon"></span>
         <h1 className="wrap-text text-2xl font-bold">git pull</h1>
@@ -367,6 +378,15 @@ const gitPullView: React.FC = () => {
               <li>「...」をクリックしてメニューを表示</li>
               <li>「プル」をクリック</li>
             </ol>
+            {imageUri && (
+              <div className="mt-6">
+                <img
+                  src={imageUri}
+                  alt="VSCode標準のGit拡張機能でのプル実行方法"
+                  className="w-full max-w-[800px] rounded-md border border-[var(--vscode-editorWidget-border)]"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
