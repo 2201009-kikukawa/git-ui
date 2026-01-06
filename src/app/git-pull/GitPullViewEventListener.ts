@@ -4,8 +4,7 @@ import { EventTypes } from "../../types/classNames";
 import { GitCommitViewProvider } from "../git-commit/GitCommitViewProvider";
 
 export class GitPullViewEventListener {
-  constructor(private readonly _context: ExtensionContext) { }
-
+  constructor(private readonly _context: ExtensionContext) {}
 
   public setWebviewMessageListener(webviewView: WebviewPanel) {
     webviewView.webview.onDidReceiveMessage((message) => {
@@ -18,10 +17,12 @@ export class GitPullViewEventListener {
             }
           } else {
             try {
-              const terminal = window.createTerminal('git pull');
+              const terminal = window.createTerminal("git pull");
               terminal.show();
               terminal.sendText(GIT_COMMANDS.pull.command);
-              window.showInformationMessage("Git Pullを実行しました");
+              window.showInformationMessage(
+                "Git Pullを実行しました。最新の変更がファイルに適用されているか確認してみましょう。"
+              );
             } catch (err: any) {
               window.showErrorMessage(`実行に失敗しました: ${err.message}`);
             }
