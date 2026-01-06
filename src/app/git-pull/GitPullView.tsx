@@ -10,6 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../components/Dialog";
+import { Tooltip, TooltipTrigger, TooltipContent } from "../../components/Tooltip";
 
 // VSCode API使用
 declare const acquireVsCodeApi: () => {
@@ -303,12 +304,18 @@ const gitPullView: React.FC = () => {
       <div className="sub-section grid">
         <div className={`${content} p-[16px] max-w-[300px]`}>
           <div className="execute-button-wrap">
-            <Button
-              className="submit-button cursor-pointer mx-auto"
-              onClick={() => setIsConfirmOpen(true)}>
-              Git Pullを実行
-            </Button>
-            <p className="execute-hint">クリック後に確認画面が開きます</p>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  className="cursor-pointer mx-auto w-full"
+                  onClick={() => setIsConfirmOpen(true)}>
+                  Git Pullを実行
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>クリック後に確認画面が開きます</p>
+              </TooltipContent>
+            </Tooltip>
           </div>
         </div>
 

@@ -82,7 +82,7 @@ html {
   opacity: 0;
   transition: opacity 0.15s ease;
   position: absolute;
-  bottom: -24px;
+  bottom: -36px;
 }
 
 .execute-button-wrap:hover .execute-hint,
