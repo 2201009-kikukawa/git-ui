@@ -107,13 +107,50 @@ const gitPullView: React.FC = () => {
 
   return (
     <div className="section-wrap px-2 md:px-6 lg:px-10">
-      {/* メインエリア */}
-      <div className="main-section">
-        <div className="header flex flex-col">
-          <span className="codicon codicon-repo-pull pull-icon"></span>
-          <h1 className="wrap-text text-2xl font-bold">git pull</h1>
+      <div className="header flex flex-col w-full lg:hidden">
+        <span className="codicon codicon-repo-pull pull-icon"></span>
+        <h1 className="wrap-text text-2xl font-bold">git pull</h1>
+      </div>
+
+      <div className="sub-section flex flex-col lg:hidden">
+        <div className={`${content} p-[16px] w-full max-w-[800px] mx-auto`}>
+          <div className="execute-button-wrap">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  className="cursor-pointer mx-auto w-full"
+                  onClick={() => setIsConfirmOpen(true)}>
+                  Git Pullを実行
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>クリック後に確認画面が開きます</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
         </div>
 
+        <div className={`${content} p-[16px] w-full max-w-[800px] mx-auto`}>
+          <h3 className="text-base font-bold">目次</h3>
+          <hr className="my-2" />
+          {sections.map(({ id, title }) => (
+            <a
+              key={id}
+              onClick={(e) => handleClick(e, id)}
+              className={`block px-4 py-1 rounded transition-colors duration-200 cursor-pointer
+                ${
+                  activeId === id
+                    ? "font-medium"
+                    : "text-[var(--vscode-descriptionForeground)] hover:underline"
+                }`}>
+              {title}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* メインエリア */}
+      <div className="main-section">
         <div className={`${content} mt-12 p-[16px] max-w-[800px]`}>
           <div>
             <h3 className="text-xl font-bold" id="description">
@@ -334,8 +371,8 @@ const gitPullView: React.FC = () => {
         </div>
       </div>
 
-      {/* サブエリア */}
-      <div className="sub-section flex flex-col">
+      {/* サブエリア（lg以上で表示） */}
+      <div className="sub-section hidden lg:flex flex-col">
         <div className={`${content} p-[16px] max-w-[300px] flex-shrink-0`}>
           <div className="execute-button-wrap">
             <Tooltip>
