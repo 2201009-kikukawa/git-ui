@@ -64,12 +64,12 @@ const gitCommitView: React.FC = () => {
                 <Button size="sm" onClick={handleDialogOpen}>実行</Button>
               </DialogTrigger>
               <DialogContent className="grid-rows-[auto]" showCloseButton={false}>
-                <DialogTitle className="text-2xl font-bold self-center">Commit Message</DialogTitle>
+                <DialogTitle className="text-2xl font-bold self-center">コミットメッセージ</DialogTitle>
                 <Input type="text" className="self-center w-[95%] mx-auto" value={commitMessage} onChange={(e) => setCommitMessage(e.target.value)} />
                 {error && <p className="text-[var(--vscode-editorError-foreground)] font-bold mt-2">{error}</p>}
                 <div className="flex flex-wrap justify-end content-center gap-4">
-                  <Button variant="secondary" onClick={() => { setIsDialogOpen(false); }}>Cancel</Button>
-                  <Button onClick={handleAlert}>Commit</Button>
+                  <Button variant="secondary" onClick={() => { setIsDialogOpen(false); }}>キャンセル</Button>
+                  <Button onClick={handleAlert}>コミット</Button>
                 </div>
               </DialogContent>
             </Dialog>
