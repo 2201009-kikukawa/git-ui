@@ -1,6 +1,6 @@
 {
   "name": "git-box",
-  "displayName": "Git Box",
+  "displayName": "Git Box - Visual Git Visualizer",
   "description": "VS Code 内で技術記事のようなナレッジを読みながら Git 操作を理解・実行できるアシストツールです。",
   "version": "0.0.1",
   "publisher": "VS-Modules",
