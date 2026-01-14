@@ -1,12 +1,12 @@
 {
-  "name": "sample-extension-04251226",
+  "name": "git-box",
   "displayName": "Git Box",
-  "description": "sample description",
+  "description": "VS Code 内で技術記事のようなナレッジを読みながら Git 操作を理解・実行できるアシストツールです。",
   "version": "0.0.1",
   "publisher": "VS-Modules",
   "repository": {
     "type": "git",
-    "url": "https://github.com/2201009-kikukawa/Sample-extension"
+    "url": "https://github.com/kazuki0903/git-box-extension"
   },
   "engines": {
     "vscode": "^1.93.1"
@@ -19,17 +19,17 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "git-ui",
+          "id": "git-box",
           "title": "Git Box",
-          "icon": "./resources/webview_icon.svg"
+          "icon": "./resources/package.svg"
         }
       ]
     },
     "views": {
-      "git-ui": [
+      "git-box": [
         {
           "type": "webview",
-          "id": "git-ui-view",
+          "id": "git-box-view",
           "name": "Git Box",
           "when": "true"
         }

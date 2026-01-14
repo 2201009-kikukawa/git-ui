@@ -67,6 +67,17 @@ const gitPushView: React.FC = () => {
   const activeId = useActiveSection(sections.map((section) => section.id));
   const [isOpen, setIsOpen] = useState<boolean[]>([]);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [imageUri, setImageUri] = useState("");
+
+  useEffect(() => {
+    const rootElement = document.getElementById("root");
+    if (rootElement) {
+      const uri = rootElement.getAttribute("data-image-uri");
+      if (uri) {
+        setImageUri(uri);
+      }
+    }
+  }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -286,6 +297,15 @@ const gitPushView: React.FC = () => {
               <li>「プッシュ」を選択（または下向き矢印横の上矢印ボタンをクリック）</li>
               <li>初めてのリモートに push する場合は、リモート名とブランチ名を確認して実行</li>
             </ol>
+            {imageUri && (
+              <div className="mt-6">
+                <img
+                  src={imageUri}
+                  alt="VSCode標準のGit拡張機能でのgit push手順"
+                  className="w-full max-w-[800px] rounded-md border border-[var(--vscode-editorWidget-border)]"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

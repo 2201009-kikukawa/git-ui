@@ -27,19 +27,31 @@ const extensionConfig = {
       assets: [
         {
           from: ["./node_modules/@vscode/codicons/dist/codicon.ttf"],
-          to: ["./out"]
+          to: ["./out"],
         },
         {
           from: ["./node_modules/@vscode/codicons/dist/codicon.css"],
-          to: ["./out"]
+          to: ["./out"],
         },
         {
           from: ["./resources/git-pull-vs-code-ui.png"],
-          to: ["./out/resources"]
-        }
-      ]
-    })
-  ]
+          to: ["./out/resources"],
+        },
+        {
+          from: ["./resources/git-push-vs-code-ui.png"],
+          to: ["./out/resources"],
+        },
+        {
+          from: ["./resources/git-add-vs-code-ui.png"],
+          to: ["./out/resources"],
+        },
+        {
+          from: ["./resources/git-commit-vs-code-ui.png"],
+          to: ["./out/resources"],
+        },
+      ],
+    }),
+  ],
 };
 
 // Config for webview source code (to be run in a web-based context)

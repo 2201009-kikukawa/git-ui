@@ -8,9 +8,9 @@ export const VSCODE_THEME_COLORS = {
 
 // CSS変数名のマッピング
 export const CSS_VARIABLE_NAMES = {
-  sidebarBackground: "--git-ui-sidebar-bg",
-  sideBarForeground: "--git-ui-sidebar-fg",
-  descriptionText: "--git-ui-description-fg",
-  customBorder: "--git-ui-border",
-  listHoverBackground: "--git-ui-hover-bg",
+  sidebarBackground: "--git-box-sidebar-bg",
+  sideBarForeground: "--git-box-sidebar-fg",
+  descriptionText: "--git-box-description-fg",
+  customBorder: "--git-box-border",
+  listHoverBackground: "--git-box-hover-bg",
 } as const;

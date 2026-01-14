@@ -6,7 +6,7 @@ html {
 
 .git-commands-container {
   display: block;
-  margin: 8px
+  margin: 8px;
 }
 
 .git-command-item {
@@ -20,7 +20,7 @@ html {
 }
 
 .git-command-item:hover {
-  background-color: var(--git-ui-hover-bg);
+  background-color: var(--git-box-hover-bg);
 }
 
 .git-command-name {
@@ -30,7 +30,7 @@ html {
 }
 
 .git-command-description {
-  color: var(--git-ui-description-fg);
+  color: var(--git-box-description-fg);
   font-size: 11px;
   margin-top: 6px;
   line-height: 1.3;

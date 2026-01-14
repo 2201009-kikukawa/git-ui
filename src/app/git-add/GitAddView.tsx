@@ -79,6 +79,17 @@ const gitAddView: React.FC = () => {
   const [fileList, setFileList] = useState<string[]>([]);
   const [stageList, setStageList] = useState<string[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [imageUri, setImageUri] = useState<string>("");
+
+  useEffect(() => {
+    const rootElement = document.getElementById("root");
+    if (rootElement) {
+      const uri = rootElement.getAttribute("data-image-uri");
+      if (uri) {
+        setImageUri(uri);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -371,6 +382,15 @@ const gitAddView: React.FC = () => {
               <li>変更一覧からステージしたいファイルの「+」アイコンを押す</li>
               <li>複数ファイルをまとめてステージしたい場合はセクション右上の「+」を使用</li>
             </ol>
+            {imageUri && (
+              <div className="mt-6">
+                <img
+                  src={imageUri}
+                  alt="VSCode標準のGit拡張機能でのgit add手順"
+                  className="w-full max-w-[800px] rounded-md border border-[var(--vscode-editorWidget-border)]"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

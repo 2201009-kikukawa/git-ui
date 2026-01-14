@@ -71,6 +71,17 @@ const gitCommitView: React.FC = () => {
   const [commitMessage, setCommitMessage] = useState("");
   const [error, setError] = useState<string>("");
   const [validationError, setValidationError] = useState<string>("");
+  const [imageUri, setImageUri] = useState<string>("");
+
+  useEffect(() => {
+    const rootElement = document.getElementById("root");
+    if (rootElement) {
+      const uri = rootElement.getAttribute("data-image-uri");
+      if (uri) {
+        setImageUri(uri);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -318,6 +329,15 @@ const gitCommitView: React.FC = () => {
                 でコミット
               </li>
             </ol>
+            {imageUri && (
+              <div className="mt-6">
+                <img
+                  src={imageUri}
+                  alt="VSCode標準のGit拡張機能でのgit commit手順"
+                  className="w-full max-w-[800px] rounded-md border border-[var(--vscode-editorWidget-border)]"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
