@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../components/Dialog";
-import { Tooltip, TooltipTrigger, TooltipContent } from "../../components/Tooltip";
+import { Tooltip, TooltipTrigger, TooltipContent } from "../../components/tooltip";
 
 // VSCode API使用
 declare const acquireVsCodeApi: () => {
